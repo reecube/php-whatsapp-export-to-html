@@ -3,6 +3,9 @@
 $PATH_BASE = __DIR__ . DIRECTORY_SEPARATOR;
 $PATH_INPUT = $PATH_BASE . 'in';
 $PATH_STYLE = $PATH_BASE . 'style';
+$PATH_OUTPUT = $PATH_BASE . 'out';
+
+$title = isset($argv[1]) ? $argv[1] : null;
 
 function readFiles(string $relativePath, string $extension): array
 {
@@ -61,8 +64,53 @@ function groupMatches(array $matches): array
     return $result;
 }
 
+function generateHtml(array $groups, string $style): string
+{
+    $result = '';
+    $result .= '<html>';
+    $result .= '<head>';
+    $result .= '<style>';
+    $result .= strip_tags($style);
+    $result .= '</style>';
+    $result .= '</head>';
+    $result .= '<body>';
+    $result .= '<div class="background"></div>';
+
+    foreach ($groups as $date => $group) {
+        $result .= '<div class="group">';
+        $result .= '<div class="group-label"><span>' . $date . '</span></div>';
+
+        foreach ($group as $message) {
+            $time = $message['time'];
+            $person = $message['person'];
+            $personId = $message['personId'];
+            $message = $message['message'];
+
+            $result .= '<div class="container" data-person="' . $personId . '">';
+
+            $result .= '<div class="datetime">';
+            $result .= '<div class="date">' . $date . '</div>';
+            $result .= '<div class="time">' . $time . '</div>';
+            $result .= '</div>';
+            $result .= '<div class="person">' . $person . '</div>';
+            $result .= '<div class="message">' . $message . '</div>';
+
+            $result .= '</div>';
+        }
+
+        $result .= '</div>';
+    }
+
+    $result .= '</body>';
+    $result .= '</html>';
+    return $result;
+}
+
 foreach (readFiles($PATH_INPUT, 'txt') as $file) {
     $content = file_get_contents($file);
+
+    // fix quotes
+    $content = preg_replace('/"/', '&quot;', $content);
 
     // fix invalid html
     $content = preg_replace('/<(.*?)>/', '<span class="special">\1</span>', $content);
@@ -71,9 +119,6 @@ foreach (readFiles($PATH_INPUT, 'txt') as $file) {
     $content = preg_replace('/\r\n/', "\r", $content);
     $content = preg_replace('/\n/', '<br>', $content);
     $content = preg_replace('/\r/', "\r\n", $content);
-
-    // fix quotes
-    $content = preg_replace('/"/', '&quot;', $content);
 
     // parse data
     $matches = [];
@@ -85,5 +130,11 @@ foreach (readFiles($PATH_INPUT, 'txt') as $file) {
 
     $groups = groupMatches($matches);
 
-    var_dump($groups);
+    foreach (readFiles($PATH_STYLE, 'css') as $style) {
+        $html = generateHtml($groups, file_get_contents($style));
+
+        $outputFilename = basename($file, '.txt') . '-' . basename($style, '.css') . '.html';
+
+        file_put_contents($PATH_OUTPUT . DIRECTORY_SEPARATOR . $outputFilename, $html);
+    }
 }

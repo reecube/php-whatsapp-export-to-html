@@ -1,0 +1,173 @@
+@page {
+    size: auto;   /* auto is the initial value */
+    margin: 0;  /* this affects the margin in the printer settings */
+}
+
+* {
+    -webkit-print-color-adjust: exact;
+}
+
+body {
+    position: relative;
+
+    margin: 0;
+    padding: 10px 10%;
+
+    font-family: 'Open Sans', sans-serif;
+}
+
+.background {
+    display: block;
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background-color: #e5ddd5;
+}
+
+.background:after {
+    content: '';
+    display: block;
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background: url('../style/background-alpha.png');
+}
+
+.group {
+    position: relative;
+
+    padding-top: 12px;
+
+    page-break-inside: avoid;
+}
+
+.group-label {
+    display: block;
+
+    margin: 0 0 12px 0;
+
+    line-height: 21px;
+
+    font-size: 13px;
+
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+
+    color: rgba(69, 90, 100, 0.95);
+}
+
+.group-label span {
+    display: inline-block;
+
+    border-radius: 8px;
+    padding: 5px 12px 6px 12px;
+
+    background-color: rgba(225, 245, 254, 0.92);
+
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.13);
+}
+
+.container {
+    display: block;
+
+    position: relative;
+
+    margin: 0 0 12px 0;
+    padding: 6px 7px 22px 9px;
+    border-radius: 8px;
+
+    line-height: 19px;
+
+    color: #262626;
+
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.13);
+
+    page-break-inside: avoid;
+}
+
+.container[data-person="0"] {
+    margin: 0;
+    border: 0;
+    padding: 0;
+
+    color: rgba(0, 0, 0, 0.95);
+
+    text-align: center;
+
+    box-shadow: none;
+}
+
+.container[data-person="0"] * {
+    display: none;
+}
+
+.container[data-person="0"] .message {
+    display: inline-block;
+
+    margin: 0 0 12px 0;
+    padding: 6px 7px 8px 9px;
+    border-radius: 8px;
+
+    background-color: rgba(255, 245, 196, 0.95);
+
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.13);
+}
+
+.container[data-person="1"] {
+    margin-left: 5%;
+
+    background-color: #dcf8c6;
+}
+
+.container[data-person="2"] {
+    margin-right: 5%;
+
+    background-color: #fff;
+}
+
+.container .datetime {
+    position: absolute;
+    right: 7px;
+    bottom: 3px;
+
+    line-height: 1em;
+
+    color: rgba(0, 0, 0, 0.45);
+
+    font-size: 11px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+}
+
+.container .datetime * {
+    float: left;
+
+    display: inline-block;
+
+    margin-left: 5px;
+}
+
+.container .person {
+    position: absolute;
+    bottom: 3px;
+    left: 7px;
+
+    line-height: 1em;
+
+    color: rgba(0, 0, 0, 0.45);
+
+    font-size: 11px;
+}
