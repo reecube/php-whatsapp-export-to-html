@@ -51,6 +51,21 @@ h1 {
     background: url('../style/background-alpha.png');
 }
 
+.special {
+    display: inline-block;
+
+    margin: 6px 0;
+    border: 1px solid;
+    border-radius: 3px;
+    padding: 5px;
+
+    text-align: center;
+
+    font-size: 14px;
+
+    background: rgba(255, 245, 196, 0.95);
+}
+
 .group {
     position: relative;
 }
