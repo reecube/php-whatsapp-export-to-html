@@ -74,7 +74,7 @@ window.onload = function() {
 }
 </script>';
     $html .= '<style>
-img.emoji {  
+img.emoji {
   margin: 0 1px !important;
   display: inline !important;
 }
@@ -109,7 +109,7 @@ function generateHtml(array $groups, string $style, string $title = null): strin
             $personId = $message['personId'];
             $message = $message['message'];
 
-            $result .= '<div class="container" data-person="' . $personId . '">';
+            $result .= '<div class="container" data-person="' . $personId . '"><div class="container-message">';
 
             $result .= '<div class="datetime">';
             $result .= '<div class="date">' . $date . '</div>';
@@ -118,7 +118,7 @@ function generateHtml(array $groups, string $style, string $title = null): strin
             $result .= '<div class="person">' . $person . '</div>';
             $result .= '<div class="message">' . $message . '</div>';
 
-            $result .= '</div>';
+            $result .= '</div></div>';
         }
 
         $result .= '</div>';

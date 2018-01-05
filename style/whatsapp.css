@@ -13,7 +13,7 @@ body {
     position: relative;
 
     margin: 0;
-    padding: 10px 10%;
+    padding: 10px 5%;
 
     font-family: 'Open Sans', sans-serif;
 }
@@ -22,6 +22,8 @@ h1 {
     position: relative;
 
     text-align: center;
+
+    page-break-after: avoid;
 }
 
 .background {
@@ -51,14 +53,19 @@ h1 {
 
 .group {
     position: relative;
+}
 
-    padding-top: 12px;
+.group:before {
+    content: '';
+    display: block;
 
-    page-break-inside: avoid;
+    height: 12px;
 }
 
 .group-label {
     display: block;
+
+    position: relative;
 
     margin: 0 0 12px 0;
 
@@ -70,6 +77,9 @@ h1 {
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
 
     color: rgba(69, 90, 100, 0.95);
+
+    page-break-inside: avoid;
+    page-break-after: avoid;
 }
 
 .group-label span {
@@ -84,6 +94,14 @@ h1 {
 }
 
 .container {
+    position: relative;
+
+    padding: 12px 0 0 0;
+
+    page-break-inside: avoid;
+}
+
+.container-message {
     display: block;
 
     position: relative;
@@ -100,11 +118,9 @@ h1 {
     font-size: 14px;
 
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.13);
-
-    page-break-inside: avoid;
 }
 
-.container[data-person="0"] {
+.container[data-person="0"] .container-message {
     margin: 0;
     border: 0;
     padding: 0;
@@ -116,11 +132,11 @@ h1 {
     box-shadow: none;
 }
 
-.container[data-person="0"] * {
+.container[data-person="0"] .container-message * {
     display: none;
 }
 
-.container[data-person="0"] .message {
+.container[data-person="0"] .container-message .message {
     display: inline-block;
 
     margin: 0 0 12px 0;
@@ -132,19 +148,19 @@ h1 {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.13);
 }
 
-.container[data-person="1"] {
+.container[data-person="1"] .container-message {
     margin-left: 5%;
 
     background-color: #dcf8c6;
 }
 
-.container[data-person="2"] {
+.container[data-person="2"] .container-message {
     margin-right: 5%;
 
     background-color: #fff;
 }
 
-.container .datetime {
+.container-message .datetime {
     position: absolute;
     right: 7px;
     bottom: 5px;
@@ -160,7 +176,7 @@ h1 {
     overflow: hidden;
 }
 
-.container .datetime * {
+.container-message .datetime * {
     float: left;
 
     display: inline-block;
@@ -168,7 +184,7 @@ h1 {
     margin-left: 5px;
 }
 
-.container .person {
+.container-message .person {
     position: absolute;
     bottom: 5px;
     left: 7px;
