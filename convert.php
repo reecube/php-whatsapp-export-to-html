@@ -44,7 +44,7 @@ function groupMatches(array $matches): array
 
         $time = $match[2];
         $person = substr($match[3], 0, $idx);
-        $message = substr($match[3], $idx);
+        $message = substr($match[3], $idx + ($person === '' ? 0 : 2));
 
         if (!isset($persons[$person])) {
             $persons[$person] = count($persons);
