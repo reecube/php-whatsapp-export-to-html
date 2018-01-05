@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
 @page {
     size: auto;   /* auto is the initial value */
     margin: 0;  /* this affects the margin in the printer settings */
@@ -14,6 +16,12 @@ body {
     padding: 10px 10%;
 
     font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+    position: relative;
+
+    text-align: center;
 }
 
 .background {
@@ -139,7 +147,7 @@ body {
 .container .datetime {
     position: absolute;
     right: 7px;
-    bottom: 3px;
+    bottom: 5px;
 
     line-height: 1em;
 
@@ -162,7 +170,7 @@ body {
 
 .container .person {
     position: absolute;
-    bottom: 3px;
+    bottom: 5px;
     left: 7px;
 
     line-height: 1em;

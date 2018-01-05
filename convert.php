@@ -64,7 +64,7 @@ function groupMatches(array $matches): array
     return $result;
 }
 
-function generateHtml(array $groups, string $style): string
+function generateHtml(array $groups, string $style, string $title = null): string
 {
     $result = '';
     $result .= '<html>';
@@ -75,6 +75,10 @@ function generateHtml(array $groups, string $style): string
     $result .= '</head>';
     $result .= '<body>';
     $result .= '<div class="background"></div>';
+
+    if ($title !== null) {
+        $result .= '<h1>' . $title . '</h1>';
+    }
 
     foreach ($groups as $date => $group) {
         $result .= '<div class="group">';
@@ -131,7 +135,7 @@ foreach (readFiles($PATH_INPUT, 'txt') as $file) {
     $groups = groupMatches($matches);
 
     foreach (readFiles($PATH_STYLE, 'css') as $style) {
-        $html = generateHtml($groups, file_get_contents($style));
+        $html = generateHtml($groups, file_get_contents($style), $title);
 
         $outputFilename = basename($file, '.txt') . '-' . basename($style, '.css') . '.html';
 
