@@ -69,12 +69,12 @@ function addEmojiSupport(string &$html): string
     $html .= '<script src="https://twemoji.maxcdn.com/twemoji.min.js"></script>';
     $html .= '<script>
 window.onload = function() {
-  twemoji.size = \'16x16\';
   twemoji.parse(document.body);
 }
 </script>';
     $html .= '<style>
 img.emoji {
+  max-width: 18px !important;
   margin: 0 1px !important;
   display: inline !important;
 }
